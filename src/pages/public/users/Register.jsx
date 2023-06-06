@@ -13,6 +13,7 @@ import { InformationCircleIcon } from "@heroicons/react/24/solid"
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import axios from "axios";
 
 const Register = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
@@ -33,7 +34,7 @@ const Register = () => {
             reset()
         profileUpdate(name,photo)
         .then(res=>{
-           
+           axios.post(import.meta.env.SERVER_URL/users, data)
         })
         .then(err=>{
             setError('Profile not updated!')
