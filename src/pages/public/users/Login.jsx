@@ -11,18 +11,33 @@ import {
   import Lottie from "lottie-react";
   import signInLottie from '../../../../public/124956-login.json'
   import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm()
+    const { register, handleSubmit, reset, formState: { errors } } = useForm()
+    const{signIn}=useContext(AuthContext)
     const [showPass,setShowPass]=useState(false)
      const [success,setSuccess]=useState('')
      const[error,setError]=useState('')
+     const navigate=useNavigate()
+     const location=useLocation()
+     const target=location?.state?.from?.pathname || '/'
 
     const handleLogin=data=>{
-        console.log(data)
+       const{email,password}=data
+        signIn(email,password)
+        .then(res=>{
+          reset()
+          toast.success('Login successful')
+          navigate(target, {replace:true})
+        })
+        .catch(err=>{
+          setError('User not found!')
+        })
     }
     return (
         <div className="my-20 w-9/12 flex flex-col lg:flex-row mx-auto gap-12">

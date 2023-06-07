@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import {
     Navbar,
-    MobileNav,
     Typography,
     Button,
     IconButton,
@@ -45,12 +44,13 @@ const profileMenuItems = [
     {
       label: "Sign Out",
       icon: PowerIcon,
+      handler:'logOut'
     },
   ];
 
   
 const Header = () => {
-    const {user}=useContext(AuthContext)
+    const {user, logOut}=useContext(AuthContext)
     const [openNav, setOpenNav] = React.useState(false);
  
   React.useEffect(() => {
@@ -59,6 +59,8 @@ const Header = () => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+
+
  
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -108,6 +110,11 @@ const Header = () => {
   function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const closeMenu = () => setIsMenuOpen(false);
+    const handleMenuItems=item=>{
+   if(item==='logOut'){
+    logOut()
+   }
+    }
    
     return (
       <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -117,7 +124,7 @@ const Header = () => {
             color="blue-gray"
             className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
           >
-            <Avatar
+             <Avatar
               variant="circular"
               size="sm"
               alt="candice wu"
@@ -133,12 +140,12 @@ const Header = () => {
           </Button>
         </MenuHandler>
         <MenuList className="p-1">
-          {profileMenuItems.map(({ label, icon }, key) => {
+          {profileMenuItems.map(({ label, icon,handler}, key) => {
             const isLastItem = key === profileMenuItems.length - 1;
             return (
               <MenuItem
                 key={label}
-                onClick={closeMenu}
+                onClick={()=>handleMenuItems(handler)}
                 className={`flex items-center gap-2 rounded ${
                   isLastItem
                     ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
@@ -227,7 +234,7 @@ const Header = () => {
           <Collapse open={openNav}>
             {navList}
            {user?
-               <ProfileMenu></ProfileMenu> : <Link to='/login'><Button variant="gradient" color='deep-purple' size="sm" fullWidth className="mb-2">
+              <ProfileMenu></ProfileMenu>: <Link to='/login'><Button variant="gradient" color='deep-purple' size="sm" fullWidth className="mb-2">
                <span to='/login'>Login</span>
              </Button></Link>
         }

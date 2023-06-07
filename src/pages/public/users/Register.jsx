@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Register = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
@@ -30,17 +31,22 @@ const Register = () => {
         }
         createUser(email,password)
         .then(res=>{
-            setSuccess('Registration has been successful')
-            reset()
         profileUpdate(name,photo)
         .then(res=>{
-           axios.post(import.meta.env.SERVER_URL/users, data)
+          const user={name,gender,email,address,phone}
+           axios.post(`${import.meta.env.VITE_SERVER_URL}/users`, user)
+           .then(res=>{
+            if(res.data.insertedId){
+              reset()
+              toast.success('Registration has been successful')
+            }
+           })
         })
-        .then(err=>{
+        .catch(err=>{
             setError('Profile not updated!')
         })
         })
-        .then(err=>{
+        .catch(err=>{
             setError('Something went wrong!')
         })
 
