@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
+import GoogleLogin from "../../../components/social logins/GoogleLogin";
 
 const Login = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
@@ -38,6 +39,13 @@ const Login = () => {
         .catch(err=>{
           setError('User not found!')
         })
+    }
+
+    const googleSignIn=()=>{
+    googleLogin()
+    .then(res=>{
+      
+    })
     }
     return (
         <div className="my-20 w-9/12 flex flex-col lg:flex-row mx-auto gap-12">
@@ -84,6 +92,9 @@ const Login = () => {
            <Link to='/register'> Create an account</Link>
           </Typography>
         </Typography>
+      <div className="text-center mx-auto mt-4 w-10/12">
+     <GoogleLogin></GoogleLogin>
+      </div>
       </CardFooter>
     </Card>
         </div>

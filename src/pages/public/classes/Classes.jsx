@@ -37,12 +37,12 @@ const Classes = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await axios.get(`http://localhost:5000/classes?page=${currentPage}&limit=${6}&sort=${0}`);
+            const response = await axios.get(`http://localhost:5000/classes?page=${currentPage}&limit=${6}&sort=${0}`)
             setClasses(response.data);
         }
         fetchData();
     }, [currentPage]);
- 
+  console.log(currentPage)
     return (
   <div className='mb-20'>
           <div className='bg-purple-500 bg-opacity-50 flex p-3 items-center justify-between'>
