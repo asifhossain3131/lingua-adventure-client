@@ -15,7 +15,7 @@ import PopularClassCard from '../../../../components/cards/PopularClassCard';
 const PopularClasses = () => {
   const [classes,setClasses]=useState([])
   useEffect(()=>{
-    fetch(`${import.meta.env.VITE_SERVER_URL}/classes`)
+    fetch(`${import.meta.env.VITE_SERVER_URL}/classes?sort=${1}`)
     .then(res=>res.json())
     .then(data=>{
         setClasses(data)

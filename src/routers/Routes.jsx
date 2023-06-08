@@ -19,7 +19,8 @@ import Classes from "../pages/public/classes/Classes";
           },
           {
               path:'/classes',
-              element:<Classes></Classes>
+              element:<Classes></Classes>,
+              loader:()=>fetch(`${import.meta.env.VITE_SERVER_URL}/classesCount`)
           },
           {
             path:'/login',
