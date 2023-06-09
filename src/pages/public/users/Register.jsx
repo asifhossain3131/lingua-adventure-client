@@ -33,7 +33,7 @@ const Register = () => {
         .then(res=>{
         profileUpdate(name,photo)
         .then(res=>{
-          const user={name,gender,email,address,phone}
+          const user={name,gender,email,address,phone,role:'user'}
            axios.post(`${import.meta.env.VITE_SERVER_URL}/users`, user)
            .then(res=>{
             if(res.data.insertedId){

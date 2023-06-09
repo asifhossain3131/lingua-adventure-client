@@ -15,7 +15,7 @@ const GoogleLogin = () => {
         googleLogin()
         .then(res=>{
             const user=res.user
-            const loggedUser={name:user.displayName, email:user.email}
+            const loggedUser={name:user.displayName, email:user.email,role:'user'}
             axios.post(`${import.meta.env.VITE_SERVER_URL}/users`, loggedUser)
             .then(response=>{
                navigate(target)
