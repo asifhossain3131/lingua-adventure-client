@@ -2,6 +2,7 @@ import { Breadcrumbs } from '@material-tailwind/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import InstructorCard from '../../../components/cards/InstructorCard';
 
 const Instructors = () => {
     const[instructors,setInstructors]=useState([])
@@ -11,6 +12,7 @@ const Instructors = () => {
             setInstructors(res.data)
         })
     },[])
+
     return (
         <div>
                  <div className='bg-purple-500 bg-opacity-50 flex p-3 items-center justify-between'>
@@ -30,6 +32,12 @@ const Instructors = () => {
       </a>
     </Breadcrumbs>
     <h1 className='text-xl font-semibold text-gray-800'>Find Your Instructor</h1>
+        </div>
+
+        <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 mx-12 mt-12'>
+          {
+            instructors.map(instructor=><InstructorCard key={instructor._id} instructor={instructor}></InstructorCard>)
+          }
         </div>
         </div>
     );
