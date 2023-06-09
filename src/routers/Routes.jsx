@@ -8,6 +8,7 @@ import Register from "../pages/public/users/Register";
 import Home from "../pages/public/home/home/Home";
 import Classes from "../pages/public/classes/Classes";
 import SingleClass from "../pages/public/classes/SingleClass";
+import Instructors from "../pages/public/instructors/Instructors";
 
   const router=createBrowserRouter([
     {
@@ -27,6 +28,10 @@ import SingleClass from "../pages/public/classes/SingleClass";
              path:'/singleClass/:id',
              element:<SingleClass></SingleClass>,
              loader:({params})=>fetch(`${import.meta.env.VITE_SERVER_URL}/class/${params?.id}`)
+          },
+          {
+path:'instructors',
+element:<Instructors></Instructors>
           },
           {
             path:'/login',
