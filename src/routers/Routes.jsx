@@ -9,6 +9,11 @@ import Home from "../pages/public/home/home/Home";
 import Classes from "../pages/public/classes/Classes";
 import SingleClass from "../pages/public/classes/SingleClass";
 import Instructors from "../pages/public/instructors/Instructors";
+import Dashboard from "../pages/private/dashboard/Dashboard";
+import UserHome from "../pages/private/dashboard/user dashboard/UserHome";
+import MySelectedClasses from "../pages/private/dashboard/user dashboard/MySelectedClasses";
+import MyEnrolledClasses from "../pages/private/dashboard/user dashboard/MyEnrolledClasses";
+import MyPaymentHistory from "../pages/private/dashboard/user dashboard/MyPaymentHistory";
 
   const router=createBrowserRouter([
     {
@@ -42,6 +47,28 @@ element:<Instructors></Instructors>
             element:<Register></Register>
           }
         ]
+    },
+    {
+      path:'dashboard',
+      element:<Dashboard></Dashboard>,
+      children:[
+        {
+          path:'/dashboard',
+          element:<UserHome></UserHome>
+        },
+        {
+          path:'myselectedclasses',
+          element:<MySelectedClasses></MySelectedClasses>
+        },
+        {
+          path:'myenrolledclasses',
+          element:<MyEnrolledClasses></MyEnrolledClasses>
+        },
+        {
+          path:'paymenthistory',
+          element:<MyPaymentHistory></MyPaymentHistory>
+        }
+      ]
     }
   ])
 
