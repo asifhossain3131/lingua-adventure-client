@@ -15,7 +15,10 @@ import {
    HandThumbUpIcon,BuildingOffice2Icon,UserGroupIcon,TableCellsIcon,
   } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../../providers/AuthProvider";
 const DashboardSidebar = () => {
+  const{logOut}=useContext(AuthContext)
     const navigate=useNavigate()
     const usersInfo=[
         {infoName:'User Home', route:'/dashboard', icon: <HomeIcon className="h-5 w-5"></HomeIcon>},
@@ -84,14 +87,14 @@ const DashboardSidebar = () => {
         }
        </List></>
       }
-       <ListItem>
+       <ListItem onClick={()=>navigate('/')}>
           <ListItemPrefix>
             <BuildingLibraryIcon className="h-5 w-5" />
           </ListItemPrefix>
           Home
         </ListItem>
        <ListItem>
-          <ListItemPrefix>
+          <ListItemPrefix onClick={()=>logOut()}>
             <ArrowRightOnRectangleIcon className="h-5 w-5" />
           </ListItemPrefix>
           Log Out

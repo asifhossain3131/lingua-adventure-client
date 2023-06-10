@@ -14,6 +14,7 @@ import UserHome from "../pages/private/dashboard/user dashboard/UserHome";
 import MySelectedClasses from "../pages/private/dashboard/user dashboard/MySelectedClasses";
 import MyEnrolledClasses from "../pages/private/dashboard/user dashboard/MyEnrolledClasses";
 import MyPaymentHistory from "../pages/private/dashboard/user dashboard/MyPaymentHistory";
+import UserPayment from "../pages/private/dashboard/user dashboard/UserPayment";
 
   const router=createBrowserRouter([
     {
@@ -67,6 +68,10 @@ element:<Instructors></Instructors>
         {
           path:'paymenthistory',
           element:<MyPaymentHistory></MyPaymentHistory>
+        },
+        {
+          path:'userpayment',
+          element:<UserPayment></UserPayment>
         }
       ]
     }

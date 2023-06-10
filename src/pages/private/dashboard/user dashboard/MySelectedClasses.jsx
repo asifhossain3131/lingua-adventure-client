@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import SectionsTitle from '../../../../components/section titles/SectionsTitle';
 import useSelectedClass from '../../../../hooks/useSelectedClass';
 import { Card, Typography } from '@material-tailwind/react';
+import useTokenSecure from '../../../../hooks/useTokenSecure';
+import { AuthContext } from '../../../../providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const MySelectedClasses = () => {
+  const{user}=useContext(AuthContext)
+  const navigate=useNavigate()
+  const[,refetch]=useSelectedClass()
+  const [tokenSecure]=useTokenSecure()
     const[selectedClasses]=useSelectedClass()
-   
+   const handleDelete=course=>{
+    tokenSecure.patch(`/cartClass/${course?.courseName}?email=${user?.email}`,user.email,course?.courseName)
+    .then(res=>{
+      refetch()
+    })
+   }
     return (
         <div>
             <SectionsTitle header={'my classes'} title={'secure your place'} subtitle={'shortly!'}></SectionsTitle>
@@ -58,7 +70,7 @@ const MySelectedClasses = () => {
                   color="blue-gray"
                   className="font-normal leading-none opacity-70"
                 >
-                  Pay now
+                  Payment
                 </Typography>
               </th>
           <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
@@ -67,7 +79,7 @@ const MySelectedClasses = () => {
                   color="blue-gray"
                   className="font-normal leading-none opacity-70"
                 >
-                  Delete
+                  Remove
                 </Typography>
               </th>
           </tr>
@@ -97,12 +109,12 @@ const MySelectedClasses = () => {
                   </Typography>
                 </td>
                 <td className="p-4">
-                  <Typography  variant="small" color="blue-gray" className="font-medium">
-                    Pay now
+                  <Typography  variant="small" color="green" className="font-medium cursor-pointer">
+                   <button onClick={()=>navigate('/dashboard/userpayment')} disabled={selectedClass?.avilableSeats===0}> Pay now</button>
                   </Typography>
                 </td>
                 <td className="p-4">
-                  <Typography  variant="small" color="blue-gray"  className="font-medium">
+                  <Typography onClick={()=>handleDelete(selectedClass)} variant="small" color="red"  className="font-medium cursor-pointer">
                     Delete
                   </Typography>
                 </td>
