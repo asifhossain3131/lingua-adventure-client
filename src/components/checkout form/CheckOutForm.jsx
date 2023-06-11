@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import useTokenSecure from '../../hooks/useTokenSecure';
 import { Button } from '@material-tailwind/react';
+import moment from 'moment/moment';
 
 const CheckOutForm = ({course}) => {
     const stripe = useStripe();
@@ -15,14 +16,12 @@ const CheckOutForm = ({course}) => {
     const[tokenSecure]=useTokenSecure()
    const price=course?.price
    const[processing,setProcessing]=useState(false)
+   const[transId,setTransId]=useState('')
 
     useEffect(()=>{
-        console.log(course);
     if(price>0){
-        console.log(price)
         tokenSecure.post(`/create-payment-intent`,{price})
         .then(res=>{
-          console.log('inside useeffet',res.data.clientSecret)
           setClientSecret(res.data.clientSecret)
         })
     }
@@ -74,20 +73,19 @@ const CheckOutForm = ({course}) => {
         //   confirmed payments 
           setProcessing(false)
           if (paymentIntent.status === 'succeeded') {
-            setTransactionId(paymentIntent.id);
-            const payment = {
+            setTransId(paymentIntent.id);
+            const paymentInfo = {
                 email: user?.email,
-                transactionId: paymentIntent.id,
+                transId: paymentIntent.id,
                 price,
-                date: new Date(),
-                courseName:course?.classname
+                date: moment().format('LLL'),
+                courseName:course?.classname,
+                instructor:course?.instructorName
             }
-            axiosSecure.post('/payments', payment)
+            tokenSecure.post('/payments', paymentInfo)
             .then(res => {
                 console.log(res.data);
-                if (res.data.result.insertedId) {
-                    // display confirm
-                }
+               
             })
         }
       };
