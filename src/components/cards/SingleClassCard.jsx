@@ -12,6 +12,7 @@ import useTokenSecure from '../../hooks/useTokenSecure';
 import { toast } from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import useEnrolledClasses from '../../hooks/useEnrolledClasses';
 
 
 const SingleClassCard = ({courseClass}) => {
@@ -19,9 +20,14 @@ const SingleClassCard = ({courseClass}) => {
     const{user}=useContext(AuthContext)
     const[tokenSecure]=useTokenSecure()
     const navigate=useNavigate()
+    const[enrolledClasses]=useEnrolledClasses()
 
 
     const handleAddClass=(courseClass)=>{
+      const exist=enrolledClasses.find(enrolledClass=>enrolledClass.courseName===courseClass.classname)
+      if(exist){
+       return toast.error('You have already enrolled for this class')
+      }
       if(user && user.email){
         tokenSecure.post(`/cartClass?email=${user?.email}&price=${courseClass?.price}&courseName=${classname}`,user?.email)
         .then(res=>{

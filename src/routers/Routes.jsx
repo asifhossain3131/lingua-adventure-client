@@ -16,11 +16,15 @@ import MyEnrolledClasses from "../pages/private/dashboard/user dashboard/MyEnrol
 import MyPaymentHistory from "../pages/private/dashboard/user dashboard/MyPaymentHistory";
 import UserPayment from "../pages/private/dashboard/user dashboard/UserPayment";
 import PrivateRoute from "./PrivateRoute";
+import AddAClass from "../pages/private/dashboard/instructor dashboard/AddAClass";
+import InstructorPublishedClasses from "../pages/private/dashboard/instructor dashboard/InstructorPublishedClasses";
+import ErrorPage from "../components/page background/ErrorPage";
 
   const router=createBrowserRouter([
     {
         path:'/',
         element:<Main></Main>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
           {
              path:'/',
@@ -53,6 +57,7 @@ element:<Instructors></Instructors>
     {
       path:'dashboard',
       element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+      errorElement:<ErrorPage></ErrorPage>,
       children:[
         {
           path:'/dashboard',
@@ -73,6 +78,14 @@ element:<Instructors></Instructors>
         {
           path:'userpayment/:courseName',
           element:<UserPayment></UserPayment>
+        },
+        {
+          path:'addaclass',
+          element:<AddAClass></AddAClass>
+        },
+        {
+          path:'instructorpublishedclass',
+          element:<InstructorPublishedClasses></InstructorPublishedClasses>
         }
       ]
     }

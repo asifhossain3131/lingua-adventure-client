@@ -36,10 +36,10 @@ const DashboardSidebar = () => {
     ]
     const instructorsInfo=[
         {infoName:'Instructor Home', route:'/', icon: <HomeIcon className="h-5 w-5"></HomeIcon>},
-        {infoName:'Add A Class', route:'/dashboard/cart', icon:<FolderPlusIcon className="h-5 w-5"></FolderPlusIcon>},
-        {infoName:'My Classes', icon:<DocumentChartBarIcon className="h-5 w-5"></DocumentChartBarIcon>},
+        {infoName:'Add A Class', route:'/dashboard/addaclass', icon:<FolderPlusIcon className="h-5 w-5"></FolderPlusIcon>},
+        {infoName:'My Classes',route:'/dashboard/instructorpublishedclass', icon:<DocumentChartBarIcon className="h-5 w-5"></DocumentChartBarIcon>},
         ]
-    const role='user'
+    const role='instructor'
     return (
         <Card className="  min-h-screen bg-gray-200 w-1/4 p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 p-4">
@@ -77,7 +77,7 @@ const DashboardSidebar = () => {
         role==='instructor' && <>  <List className="border-b-2 border-blue-gray-700">
         {
          instructorsInfo?.map(instructor=>
-             <ListItem >
+             <ListItem onClick={()=>navigate(instructor.route)}>
              <ListItemPrefix>
             {instructor.icon}
              </ListItemPrefix>

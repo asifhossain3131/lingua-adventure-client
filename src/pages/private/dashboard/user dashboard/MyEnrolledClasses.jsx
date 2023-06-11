@@ -1,22 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
 import SectionsTitle from '../../../../components/section titles/SectionsTitle';
 import { Card, Typography } from '@material-tailwind/react';
-import useTokenSecure from '../../../../hooks/useTokenSecure';
-import { AuthContext } from '../../../../providers/AuthProvider';
 import { Link } from 'react-router-dom';
+import useEnrolledClasses from '../../../../hooks/useEnrolledClasses';
 
 const MyEnrolledClasses = () => {
     const TABLE_HEAD = ["" ,"Class Name", "Instructor", "Price", "Details"]
-    const [enrolledClasses,setEnrolledClasses]=useState([])
-    const [tokenSecure]=useTokenSecure()
-    const {user,loading}=useContext(AuthContext)
-
-   if(!loading){
-    useEffect(()=>{
-        tokenSecure.get(`/enrolledClasses/${user?.email}`,user?.email)
-        .then(res=>setEnrolledClasses(res.data.enrolledClasses))
-      },[])
-   }
+    const[enrolledClasses]=useEnrolledClasses()
     return (
         <div>
             <SectionsTitle header={'enrolled classes'} title={'the more knowledge'} subtitle={'the more experiences'}></SectionsTitle>
