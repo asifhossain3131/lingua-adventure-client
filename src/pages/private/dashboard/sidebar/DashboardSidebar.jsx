@@ -30,8 +30,8 @@ const DashboardSidebar = () => {
 
     const adminInfo=[
         {infoName:'Admin Home', route:'/', icon: <HomeIcon className="h-5 w-5"></HomeIcon>},
-        {infoName:'Manage Classes', route:'/dashboard/cart', icon:<BuildingOffice2Icon className="h-5 w-5"></BuildingOffice2Icon>},
-        {infoName:'Manage Users', icon:<UserGroupIcon className="h-5 w-5"></UserGroupIcon>},
+        {infoName:'Manage Classes',  icon:<BuildingOffice2Icon className="h-5 w-5"></BuildingOffice2Icon>},
+        {infoName:'Manage Users',route:'/dashboard/manageusers', icon:<UserGroupIcon className="h-5 w-5"></UserGroupIcon>},
         {infoName:'Enrollments', route:'/dashboard/paymenthistory', icon:<TableCellsIcon className="h-5 w-5"></TableCellsIcon>},
     ]
     const instructorsInfo=[
@@ -39,7 +39,7 @@ const DashboardSidebar = () => {
         {infoName:'Add A Class', route:'/dashboard/addaclass', icon:<FolderPlusIcon className="h-5 w-5"></FolderPlusIcon>},
         {infoName:'My Classes',route:'/dashboard/instructorpublishedclass', icon:<DocumentChartBarIcon className="h-5 w-5"></DocumentChartBarIcon>},
         ]
-    const role='instructor'
+    const role='admin'
     return (
         <Card className="  min-h-screen bg-gray-200 w-1/4 p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 p-4">
@@ -63,7 +63,7 @@ const DashboardSidebar = () => {
         role==='admin' && <>  <List className="border-b-2 border-blue-gray-700">
         {
          adminInfo?.map(admin=>
-             <ListItem>
+             <ListItem onClick={()=>navigate(admin.route)}>
              <ListItemPrefix>
             {admin.icon}
              </ListItemPrefix>

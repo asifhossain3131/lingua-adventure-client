@@ -11,7 +11,7 @@ const ErrorPage = () => {
         <div>
              <div className='w-[350px] lg:w-[400px] flex flex-col space-y-3 justify-center items-center mx-auto'>
             <Lottie animationData={confused} loop={true} />
-            <h1 className='text-red-600 font-semibold '>{errorMessage.error.message}</h1>
+            <h1 className='text-red-600 font-semibold '>{errorMessage?.error?.message}</h1>
             <Button onClick={()=>navigate(-1)} color='green' size="sm">Go Back</Button>
         </div>
         </div>

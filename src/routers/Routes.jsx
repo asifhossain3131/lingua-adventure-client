@@ -19,6 +19,8 @@ import PrivateRoute from "./PrivateRoute";
 import AddAClass from "../pages/private/dashboard/instructor dashboard/AddAClass";
 import InstructorPublishedClasses from "../pages/private/dashboard/instructor dashboard/InstructorPublishedClasses";
 import ErrorPage from "../components/page background/ErrorPage";
+import UpdateClass from "../pages/private/dashboard/instructor dashboard/UpdateClass";
+import ManageUsers from "../pages/private/dashboard/admin dashboard/ManageUsers";
 
   const router=createBrowserRouter([
     {
@@ -86,6 +88,15 @@ element:<Instructors></Instructors>
         {
           path:'instructorpublishedclass',
           element:<InstructorPublishedClasses></InstructorPublishedClasses>
+        },
+        {
+          path:'updateClass/:id',
+          element:<UpdateClass></UpdateClass>,
+          loader:({params})=>fetch(`${import.meta.env.VITE_SERVER_URL}/class/${params?.id}`)
+        },
+        {
+          path:'manageusers',
+          element:<ManageUsers></ManageUsers>
         }
       ]
     }

@@ -5,6 +5,7 @@ import { AuthContext } from '../../../../providers/AuthProvider';
 import SectionsTitle from '../../../../components/section titles/SectionsTitle';
 import { Avatar, Button, Card, CardBody, CardHeader, Chip, IconButton, Input, Tooltip, Typography } from '@material-tailwind/react';
 import { ArrowDownTrayIcon, MagnifyingGlassIcon, PencilIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
 
 const InstructorPublishedClasses = () => {
     const{user,loading}=useContext(AuthContext)
@@ -17,10 +18,13 @@ const InstructorPublishedClasses = () => {
             queryKey:['instructorName',user?.displayName],
             enabled:!loading,
             queryFn:async()=>{
-                const res=await tokenSecure.get(`/instructorClasses/${'John Smith'}`)
+                const res=await tokenSecure.get(`/instructorClasses/${user?.displayName}`)
                 return res.data
             }
     })
+    const handleUpdate=id=>{
+        console.log(id);
+    }
     return (
         <div>
             <SectionsTitle header={'my classes'} title={'update classes'} subtitle={'have fun!'}></SectionsTitle>
@@ -44,7 +48,7 @@ const InstructorPublishedClasses = () => {
           </thead>
           <tbody>
             {instructorClasses?.map(
-              ({ classname, transId, status, enrolledStudents ,feedback}, index) => {
+              ({ classname, _id, status, enrolledStudents ,feedback}, index) => {
                 const isLast = index === instructorClasses.length - 1;
                 const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
  
@@ -81,9 +85,9 @@ const InstructorPublishedClasses = () => {
                     </td>
                     <td className={classes}>
                     <Tooltip content="Edit class">
-                      <IconButton variant="text" color="blue-gray">
+                     <Link to={`/dashboard/updateClass/${_id}`}> <IconButton variant="text" color="blue-gray">
                         <PencilIcon className="h-4 w-4" />
-                      </IconButton>
+                      </IconButton></Link>
                     </Tooltip>
                   </td>
                   </tr>
