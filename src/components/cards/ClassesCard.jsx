@@ -34,7 +34,7 @@ const ClassesCard = ({item}) => {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">
-       <Link to={`/singleClass/${_id}`}>
+       <Link to={`/singleClass/${classname}`}>
        <Button
             ripple={false}
             fullWidth={true}

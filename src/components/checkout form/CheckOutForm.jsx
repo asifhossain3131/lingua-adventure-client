@@ -5,6 +5,8 @@ import { AuthContext } from '../../providers/AuthProvider';
 import useTokenSecure from '../../hooks/useTokenSecure';
 import { Button } from '@material-tailwind/react';
 import moment from 'moment/moment';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const CheckOutForm = ({course}) => {
     const stripe = useStripe();
@@ -17,6 +19,7 @@ const CheckOutForm = ({course}) => {
    const price=course?.price
    const[processing,setProcessing]=useState(false)
    const[transId,setTransId]=useState('')
+   const navigate=useNavigate()
 
     useEffect(()=>{
     if(price>0){
@@ -84,8 +87,8 @@ const CheckOutForm = ({course}) => {
             }
             tokenSecure.post('/payments', paymentInfo)
             .then(res => {
-                console.log(res.data);
-               
+                toast.success(`${res.data.message} with ${transId}`)
+                 navigate('/dashboard/myenrolledclasses')
             })
         }
       };

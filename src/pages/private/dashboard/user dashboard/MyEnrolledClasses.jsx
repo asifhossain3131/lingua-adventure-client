@@ -3,6 +3,7 @@ import SectionsTitle from '../../../../components/section titles/SectionsTitle';
 import { Card, Typography } from '@material-tailwind/react';
 import useTokenSecure from '../../../../hooks/useTokenSecure';
 import { AuthContext } from '../../../../providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const MyEnrolledClasses = () => {
     const TABLE_HEAD = ["" ,"Class Name", "Instructor", "Price", "Details"]
@@ -64,11 +65,11 @@ const MyEnrolledClasses = () => {
                   </Typography>
                 </td>
                 <td className={`${classes} bg-blue-gray-50/50`}>
-                  <Typography as="a"  variant="small" color="blue" className="font-medium">
+                  <Link to={`/singleClass/${courseName}`}><Typography as="a"  variant="small" color="blue" className="font-medium">
                     View Details
-                  </Typography>
+                  </Typography></Link>
                 </td>
-              </tr>
+              </tr> 
             );
           })}
         </tbody>

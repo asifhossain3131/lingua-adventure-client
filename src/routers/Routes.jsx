@@ -32,9 +32,9 @@ import PrivateRoute from "./PrivateRoute";
               loader:()=>fetch(`${import.meta.env.VITE_SERVER_URL}/classesCount`)
           },
           {
-             path:'/singleClass/:id',
+             path:'/singleClass/:classes',
              element:<SingleClass></SingleClass>,
-             loader:({params})=>fetch(`${import.meta.env.VITE_SERVER_URL}/class/${params?.id}`)
+             loader:({params})=>fetch(`${import.meta.env.VITE_SERVER_URL}/classes/${params?.classes}`)
           },
           {
 path:'instructors',

@@ -68,7 +68,7 @@ const SingleClassTab = ({courseClass}) => {
             <h1><span className="text-xl">Overview:</span> {desc}</h1>
             <div className="mx-auto lg:w-1/2 mt-6">
                 {
-                    courseCurriculums.map(curriculam=>
+                    courseCurriculums?.map(curriculam=>
                         <Card className="w-96">
                         <List className="bg-yellow-700 border-b-2">
                           <ListItem ripple={false} className="py-1 pr-1 pl-4">
