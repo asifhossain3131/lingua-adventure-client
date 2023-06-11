@@ -3,13 +3,16 @@ import { AuthContext } from '../providers/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+// const tokenSecure = axios.create({
+//   baseURL: `${import.meta.env.VITE_SERVER_URL}`, 
+// });
+const tokenSecure = axios.create({
+  baseURL: `http://localhost:5000`, 
+});
 const useTokenSecure = () => {
     const{logOut}=useContext(AuthContext)
     const navigate=useNavigate()
 
-    const tokenSecure = axios.create({
-        baseURL: `${import.meta.env.VITE_SERVER_URL}`, 
-      });
     
       useEffect(() => {
         tokenSecure.interceptors.request.use((config) => {

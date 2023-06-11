@@ -110,7 +110,7 @@ const MySelectedClasses = () => {
                 </td>
                 <td className="p-4">
                   <Typography  variant="small" color="green" className="font-medium cursor-pointer">
-                   <button onClick={()=>navigate('/dashboard/userpayment')} disabled={selectedClass?.avilableSeats===0}> Pay now</button>
+                   <button onClick={()=>navigate(`/dashboard/userpayment/${selectedClass?.courseName}`)} disabled={selectedClass?.avilableSeats===0}> Pay now</button>
                   </Typography>
                 </td>
                 <td className="p-4">

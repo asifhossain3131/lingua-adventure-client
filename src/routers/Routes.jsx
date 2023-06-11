@@ -70,7 +70,7 @@ element:<Instructors></Instructors>
           element:<MyPaymentHistory></MyPaymentHistory>
         },
         {
-          path:'userpayment',
+          path:'userpayment/:courseName',
           element:<UserPayment></UserPayment>
         }
       ]
