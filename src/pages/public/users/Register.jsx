@@ -15,6 +15,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import GoogleLogin from "../../../components/social logins/GoogleLogin";
 
 const Register = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
@@ -129,6 +130,9 @@ const Register = () => {
           </Link>
         </Typography>
       </form>
+      <div className="text-center mx-auto mt-4 w-10/12">
+     <GoogleLogin></GoogleLogin>
+      </div>
     </Card>
         </div>
     );

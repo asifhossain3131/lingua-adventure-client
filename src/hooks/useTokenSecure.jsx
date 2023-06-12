@@ -7,7 +7,7 @@ import axios from 'axios';
 //   baseURL: `${import.meta.env.VITE_SERVER_URL}`, 
 // });
 const tokenSecure = axios.create({
-  baseURL: `http://localhost:5000`, 
+  baseURL: `https://lingua-adventure-server.vercel.app`, 
 });
 const useTokenSecure = () => {
     const{logOut}=useContext(AuthContext)

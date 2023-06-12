@@ -15,21 +15,24 @@ const PopularInstructors = () => {
         <div>
             <SectionsTitle header={'popular instructors'} title={'instructors followed by'} subtitle={'most students'}></SectionsTitle>
 
-          <motion.div onClick={()=>setSelectedId(!selectedId)} className='card bg-red-600 w-96'>
-         <motion.h2>jjljljlj</motion.h2>
-        
-          </motion.div>
+          <div className='mx-12 grid grid-cols-1 lg:grid-cols-3 gap-4'>
+            {
+              PopularInstructors?.map(popularInstructor=>
+                <motion.div onClick={()=>setSelectedId(!selectedId)} className='card cursor-pointer bg-gray-400 w-64'>
+                <motion.h2 className='text-center p-2'>{popularInstructor?.name}</motion.h2>
+                <motion.img src={popularInstructor?.image}></motion.img>
+                 {selectedId && <>
+                 <motion.div className='flex flex-col items-center justify-center mt-3'>
+                 <motion.h1>{popularInstructor?.email}</motion.h1>
+                 <motion.h3>{popularInstructor?.followers} Followers</motion.h3>
+                 </motion.div>
+                 </>}
+                 </motion.div>
+                )
+            }
+          </div>
 
-          <AnimatePresence>
-  {selectedId && (
-    <motion.div layoutId={selectedId}>
-      <motion.h5>fdfsdf</motion.h5>
-      <motion.h2>dfsdfsdf</motion.h2>
-      <motion.button onClick={() => setSelectedId(false)} />
-    </motion.div>
-  )}
-</AnimatePresence>
- 
+         
         </div>
     );
 };

@@ -49,7 +49,7 @@ const ManageUsers = () => {
           .then(res=>{
             refetch()
             Swal.fire(
-              'Deleted!',
+              'Successful!',
               `${name} has become ${role} now`,
               'success'
             )

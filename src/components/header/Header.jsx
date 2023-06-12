@@ -23,6 +23,7 @@ import {
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import ToggleDarkMode from '../toggle dark mode/ToggleDarkMode';
+import { ThemeContext } from '../../providers/DarkProvider';
 
   // profile menu component
 const profileMenuItems = [
@@ -53,6 +54,7 @@ const profileMenuItems = [
 const Header = () => {
     const {user, logOut}=useContext(AuthContext)
     const [openNav, setOpenNav] = React.useState(false);
+    const{darkMode, toggleDarkMode}=useContext(ThemeContext)
  
   React.useEffect(() => {
     window.addEventListener(
@@ -60,11 +62,6 @@ const Header = () => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
-
-  const hanldeDarkMode=()=>{
-    console.log('jji');
-  }
-
 
  
   const navList = (
@@ -98,8 +95,8 @@ const Header = () => {
         <Link to='/instructors' className="flex items-center">
           Instructors
         </Link>
-      </Typography>
-      <Typography
+        </Typography>
+    {user&&   <Typography
         as="li"
         variant="small"
         color="blue-gray"
@@ -108,8 +105,8 @@ const Header = () => {
         <Link to='/dashboard' className="flex items-center">
           Dashboard
         </Link>
-      </Typography>
-     <button onClick={hanldeDarkMode}><ToggleDarkMode ></ToggleDarkMode></button>
+      </Typography>}
+     <button  onChange={toggleDarkMode}><ToggleDarkMode ></ToggleDarkMode></button>
     </ul>
   );
 
