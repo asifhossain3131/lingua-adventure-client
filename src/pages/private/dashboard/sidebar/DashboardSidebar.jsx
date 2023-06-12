@@ -32,7 +32,7 @@ const DashboardSidebar = () => {
 
     const adminInfo=[
         {infoName:'Admin Home', route:'/', icon: <HomeIcon className="h-5 w-5"></HomeIcon>},
-        {infoName:'Manage Classes',  icon:<BuildingOffice2Icon className="h-5 w-5"></BuildingOffice2Icon>},
+        {infoName:'Manage Classes', route:'/dashboard/manageclasses', icon:<BuildingOffice2Icon className="h-5 w-5"></BuildingOffice2Icon>},
         {infoName:'Manage Users',route:'/dashboard/manageusers', icon:<UserGroupIcon className="h-5 w-5"></UserGroupIcon>},
         {infoName:'Enrollments', route:'/dashboard/paymenthistory', icon:<TableCellsIcon className="h-5 w-5"></TableCellsIcon>},
     ]

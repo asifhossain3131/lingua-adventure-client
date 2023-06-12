@@ -23,6 +23,7 @@ import UpdateClass from "../pages/private/dashboard/instructor dashboard/UpdateC
 import ManageUsers from "../pages/private/dashboard/admin dashboard/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
+import ManageClasses from "../pages/private/dashboard/admin dashboard/ManageClasses";
 
   const router=createBrowserRouter([
     {
@@ -99,6 +100,10 @@ element:<Instructors></Instructors>
         {
           path:'manageusers',
           element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+        },
+        {
+        path:'manageclasses',
+        element:<AdminRoute><ManageClasses></ManageClasses></AdminRoute>
         }
       ]
     }
