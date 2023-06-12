@@ -6,10 +6,10 @@ import Spinner from '../components/page background/Spinner';
 
 const AdminRoute = ({children}) => {
     const[role,isRoleLoading]=useRole()
-    const{user}=useContext(AuthContext)
+    const{user,loading}=useContext(AuthContext)
     const location=useLocation()
 
-    if( isRoleLoading){
+    if(loading|| isRoleLoading){
         return <Spinner></Spinner>
     }
 
