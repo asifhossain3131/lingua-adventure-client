@@ -22,6 +22,7 @@ import {
   } from "@heroicons/react/24/outline";
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link } from 'react-router-dom';
+import ToggleDarkMode from '../toggle dark mode/ToggleDarkMode';
 
   // profile menu component
 const profileMenuItems = [
@@ -59,6 +60,10 @@ const Header = () => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+
+  const hanldeDarkMode=()=>{
+    console.log('jji');
+  }
 
 
  
@@ -104,6 +109,7 @@ const Header = () => {
           Dashboard
         </Link>
       </Typography>
+     <button onClick={hanldeDarkMode}><ToggleDarkMode ></ToggleDarkMode></button>
     </ul>
   );
 

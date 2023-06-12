@@ -17,6 +17,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
+import useRole from "../../../../hooks/useRole";
+import Spinner from "../../../../components/page background/Spinner";
 const DashboardSidebar = () => {
   const{logOut}=useContext(AuthContext)
     const navigate=useNavigate()
@@ -39,7 +41,10 @@ const DashboardSidebar = () => {
         {infoName:'Add A Class', route:'/dashboard/addaclass', icon:<FolderPlusIcon className="h-5 w-5"></FolderPlusIcon>},
         {infoName:'My Classes',route:'/dashboard/instructorpublishedclass', icon:<DocumentChartBarIcon className="h-5 w-5"></DocumentChartBarIcon>},
         ]
-    const role='admin'
+    const [role,isRoleLoading]=useRole()  
+    if(isRoleLoading){
+      return <Spinner></Spinner>
+    }  
     return (
         <Card className="  min-h-screen bg-gray-200 w-1/4 p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 p-4">

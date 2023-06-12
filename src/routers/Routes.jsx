@@ -21,6 +21,8 @@ import InstructorPublishedClasses from "../pages/private/dashboard/instructor da
 import ErrorPage from "../components/page background/ErrorPage";
 import UpdateClass from "../pages/private/dashboard/instructor dashboard/UpdateClass";
 import ManageUsers from "../pages/private/dashboard/admin dashboard/ManageUsers";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
   const router=createBrowserRouter([
     {
@@ -63,40 +65,40 @@ element:<Instructors></Instructors>
       children:[
         {
           path:'/dashboard',
-          element:<UserHome></UserHome>
+          element:<PrivateRoute><UserHome></UserHome></PrivateRoute>
         },
         {
           path:'myselectedclasses',
-          element:<MySelectedClasses></MySelectedClasses>
+          element:<PrivateRoute><MySelectedClasses></MySelectedClasses></PrivateRoute>
         },
         {
           path:'myenrolledclasses',
-          element:<MyEnrolledClasses></MyEnrolledClasses>
+          element:<PrivateRoute><MyEnrolledClasses></MyEnrolledClasses></PrivateRoute>
         },
         {
           path:'paymenthistory',
-          element:<MyPaymentHistory></MyPaymentHistory>
+          element:<PrivateRoute><MyPaymentHistory></MyPaymentHistory></PrivateRoute>
         },
         {
           path:'userpayment/:courseName',
-          element:<UserPayment></UserPayment>
+          element:<PrivateRoute><UserPayment></UserPayment></PrivateRoute>
         },
         {
           path:'addaclass',
-          element:<AddAClass></AddAClass>
+          element:<InstructorRoute><AddAClass></AddAClass></InstructorRoute>
         },
         {
           path:'instructorpublishedclass',
-          element:<InstructorPublishedClasses></InstructorPublishedClasses>
+          element:<InstructorRoute><InstructorPublishedClasses></InstructorPublishedClasses></InstructorRoute>
         },
         {
           path:'updateClass/:id',
-          element:<UpdateClass></UpdateClass>,
+          element:<InstructorRoute><UpdateClass></UpdateClass></InstructorRoute>,
           loader:({params})=>fetch(`${import.meta.env.VITE_SERVER_URL}/class/${params?.id}`)
         },
         {
           path:'manageusers',
-          element:<ManageUsers></ManageUsers>
+          element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
         }
       ]
     }

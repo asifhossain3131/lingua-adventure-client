@@ -19,8 +19,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import useTokenSecure from "../../../../hooks/useTokenSecure";
+import Swal from "sweetalert2";
 
-const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
+const TABLE_HEAD = ["Member", "Role", "Role Change", "Update"];
 const ManageUsers = () => {
     const{loading}=useContext(AuthContext)
     const[tokenSecure]=useTokenSecure()
@@ -32,7 +33,30 @@ const ManageUsers = () => {
           return res.data
         }
     })
-    console.log(users);
+
+    const handleRoleChange=(id,name,role)=>{
+      Swal.fire({
+        title: 'Are you sure?',
+        text: `You want to make ${name} as ${role}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `Make ${role}`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          tokenSecure.patch(`/user/${id}?role=${role}`)
+          .then(res=>{
+            refetch()
+            Swal.fire(
+              'Deleted!',
+              `${name} has become ${role} now`,
+              'success'
+            )
+          })
+        }
+      })
+    }
     return (
         <div>
             <SectionsTitle header={'manage users'} title={'users are like a'} subtitle={'friend'}></SectionsTitle>
@@ -68,8 +92,8 @@ const ManageUsers = () => {
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
-              {TABLE_HEAD.map((head) => (
-                <th key={head} className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+              {TABLE_HEAD.map((head,i) => (
+                <th key={i} className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
                   <Typography
                     variant="small"
                     color="blue-gray"
@@ -82,7 +106,7 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map(({ img, name, email, job, org, online, date }, index) => {
+            {users?.map(({ name, email, role, _id }, index) => {
               const isLast = index === users?.length - 1;
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
  
@@ -90,7 +114,7 @@ const ManageUsers = () => {
                 <tr key={name}>
                   <td className={classes}>
                     <div className="flex items-center gap-3">
-                      <Avatar src={img} alt={name} size="sm" />
+                      <Avatar src='' alt={name} size="sm" />
                       <div className="flex flex-col">
                         <Typography variant="small" color="blue-gray" className="font-normal">
                           {name}
@@ -108,31 +132,16 @@ const ManageUsers = () => {
                   <td className={classes}>
                     <div className="flex flex-col">
                       <Typography variant="small" color="blue-gray" className="font-normal">
-                        {job}
+                        {role}
                       </Typography>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal opacity-70"
-                      >
-                        {org}
-                      </Typography>
+            
                     </div>
                   </td>
                   <td className={classes}>
-                    <div className="w-max">
-                      <Chip
-                        variant="ghost"
-                        size="sm"
-                        value={online ? "online" : "offline"}
-                        color={online ? "green" : "blue-gray"}
-                      />
+                    <div className="w-max flex flex-col space-y-2">
+                    <Button disabled={role==='admin'} onClick={()=>handleRoleChange(_id, name,'admin')} color="blue" size="sm">Make Admin</Button>
+                    <Button disabled={role==='instructor'} onClick={()=>handleRoleChange(_id, name,'instructor')} color="blue-gray" size="sm">Make Instructor</Button>
                     </div>
-                  </td>
-                  <td className={classes}>
-                    <Typography variant="small" color="blue-gray" className="font-normal">
-                      {date}
-                    </Typography>
                   </td>
                   <td className={classes}>
                     <Tooltip content="Edit User">
