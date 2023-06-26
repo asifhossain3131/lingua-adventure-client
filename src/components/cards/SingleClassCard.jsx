@@ -13,6 +13,7 @@ import { toast } from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import useEnrolledClasses from '../../hooks/useEnrolledClasses';
+import useRole from '../../hooks/useRole';
 
 
 const SingleClassCard = ({courseClass}) => {
@@ -21,6 +22,7 @@ const SingleClassCard = ({courseClass}) => {
     const[tokenSecure]=useTokenSecure()
     const navigate=useNavigate()
     const[enrolledClasses]=useEnrolledClasses()
+    const[role]=useRole()
 
 
     const handleAddClass=(courseClass)=>{
@@ -76,7 +78,7 @@ const SingleClassCard = ({courseClass}) => {
            <p>Price: {price}</p>
           </Typography>
           
-            <Button onClick={()=>handleAddClass(courseClass)} disabled={totalSeats===enrolledStudents} variant="text" className="flex items-center gap-2">
+            <Button onClick={()=>handleAddClass(courseClass)} disabled={totalSeats===enrolledStudents || role==='admin' || role==='instructor'} variant="text" className="flex items-center gap-2">
               Select Class 
             </Button>
             {totalSeats===enrolledStudents && <span>No Space For this Class Now!</span>}

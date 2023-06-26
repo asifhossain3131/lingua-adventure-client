@@ -7,6 +7,9 @@ import {
     Tooltip,
     Button,
   } from "@material-tailwind/react";
+  import {
+   HandThumbUpIcon
+  } from "@heroicons/react/24/outline";
 const InstructorCard = ({instructor}) => {
     const{name,email,image,classes,followers,_id}=instructor
     return (
@@ -24,8 +27,10 @@ const InstructorCard = ({instructor}) => {
           </Typography>
         </CardBody>
         <CardFooter className="flex justify-center gap-4 pt-2">
-        <Button size="md" variant="outlined">See All Classes</Button>
-        <Button size="md" variant="outlined">Follow</Button>
+        <Button size="sm" variant="outlined">See All Classes</Button>
+        <Button variant="text" className="flex items-center gap-2">
+        Follow <HandThumbUpIcon strokeWidth={2} className="h-5 w-5" ></HandThumbUpIcon>
+      </Button>
         </CardFooter>
       </Card>
     );

@@ -15,12 +15,14 @@ import {
    HandThumbUpIcon,BuildingOffice2Icon,UserGroupIcon,TableCellsIcon,
   } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import useRole from "../../../../hooks/useRole";
 import Spinner from "../../../../components/page background/Spinner";
+import arrow from '../../../../assets/arrow.png'
 const DashboardSidebar = () => {
   const{logOut}=useContext(AuthContext)
+  const [open,setOpen]=useState(true)
     const navigate=useNavigate()
     const usersInfo=[
         {infoName:'User Home', route:'/dashboard', icon: <HomeIcon className="h-5 w-5"></HomeIcon>},
@@ -46,63 +48,64 @@ const DashboardSidebar = () => {
       return <Spinner></Spinner>
     }  
     return (
-        <Card className="  min-h-screen bg-gray-200 w-1/4 p-4 shadow-xl shadow-blue-gray-900/5">
+        <Card className={`${open? 'w-72':'w-20'}  min-h-screen bg-gray-200 relative duration-300 p-4 shadow-xl shadow-blue-gray-900/5`}>
+          <img onClick={()=>setOpen(!open)} src={arrow} alt="" className={`absolute w-8 border-2 p-1 duration-300 rounded-full bg-gray-400 border-zinc-700 cursor-pointer -right-3 top-9 ${!open && 'rotate-180'}`} />
       <div className="mb-2 p-4">
-        <Typography variant="h5" color="blue-gray">
+        <Typography variant="h5" color="blue-gray" className={`font-semibold text-black text-2xl origin-left duration-500 ${!open && 'scale-0'}`}>
           {role==='user'? 'User' : role==='admin'? 'Admin' : 'Instructor'} Dashboard
         </Typography>
       </div>
-     {role==='user' && <>  <List className="border-b-2 border-blue-gray-700">
+     {role==='user' && <>  <List className={`${open && 'border-b-2'} border-blue-gray-700`}>
        {
-        usersInfo?.map(userInfo=>
-            <ListItem onClick={()=>navigate(userInfo.route)}>
+        usersInfo?.map((userInfo,i)=>
+            <ListItem key={i} onClick={()=>navigate(userInfo.route)} className="hover:bg-blue-800">
             <ListItemPrefix>
            {userInfo.icon}
             </ListItemPrefix>
-            {userInfo?.infoName}
+            <span className={`font-semibold ${!open && 'hidden origin-left duration-200'}`}>{userInfo?.infoName}</span>
           </ListItem>
             )
        }
       </List></>}
       {
-        role==='admin' && <>  <List className="border-b-2 border-blue-gray-700">
+        role==='admin' && <>  <List className={`${open && 'border-b-2'} border-blue-gray-700`}>
         {
-         adminInfo?.map(admin=>
-             <ListItem onClick={()=>navigate(admin.route)}>
+         adminInfo?.map((admin,i)=>
+             <ListItem key={i} onClick={()=>navigate(admin.route)} className="hover:bg-blue-800">
              <ListItemPrefix>
             {admin.icon}
              </ListItemPrefix>
-             {admin?.infoName}
+             <span className={`font-semibold ${!open && 'hidden origin-left duration-200'}`}>{admin?.infoName}</span>
            </ListItem>
              )
         }
        </List></>
       }
       {
-        role==='instructor' && <>  <List className="border-b-2 border-blue-gray-700">
+        role==='instructor' && <>  <List className={`${open && 'border-b-2'} border-blue-gray-700`}>
         {
-         instructorsInfo?.map(instructor=>
-             <ListItem onClick={()=>navigate(instructor.route)}>
+         instructorsInfo?.map((instructor,i)=>
+             <ListItem key={i} onClick={()=>navigate(instructor.route)} className="hover:bg-blue-800">
              <ListItemPrefix>
             {instructor.icon}
              </ListItemPrefix>
-             {instructor?.infoName}
+            <span className={`font-semibold ${!open && 'hidden origin-left duration-200'}`}> {instructor?.infoName}</span>
            </ListItem>
              )
         }
        </List></>
       }
-       <ListItem onClick={()=>navigate('/')}>
+       <ListItem  onClick={()=>navigate('/')}>
           <ListItemPrefix>
             <BuildingLibraryIcon className="h-5 w-5" />
           </ListItemPrefix>
-          Home
+         <span className={`font-semibold ${!open && 'hidden origin-left duration-200'}`}> Home</span>
         </ListItem>
        <ListItem>
           <ListItemPrefix onClick={()=>logOut()}>
             <ArrowRightOnRectangleIcon className="h-5 w-5" />
           </ListItemPrefix>
-          Log Out
+          <span className={`font-semibold ${!open && 'hidden origin-left duration-200'}`}>Log Out</span>
         </ListItem>
     </Card>
     );
