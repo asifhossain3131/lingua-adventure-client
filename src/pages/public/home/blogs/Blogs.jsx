@@ -1,5 +1,6 @@
 import React from "react";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
+import SectionsTitle from "../../../../components/section titles/SectionsTitle";
 
 const Blogs = () => {
   const allBlogs = [
@@ -40,7 +41,7 @@ const Blogs = () => {
 
   return (
     <div>
-      <h1 className="font-semibold text-3xl text-center">Our Blog</h1>
+      <SectionsTitle header={'blogs'} title={'most popular ones'}></SectionsTitle>
       <div className="flex flex-col lg:flex-row gap-4 mx-12">
         {allBlogs.map(
           ({ id, title, description, author, date, image, link }) => (

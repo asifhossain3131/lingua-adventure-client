@@ -25,8 +25,7 @@ const PopularClasses = () => {
         <div>
             <SectionsTitle
             header={'popular classes'}
-            title={'liked by'}
-            subtitle={'students'}
+            title={"student's favorite"}
             ></SectionsTitle>
 
              

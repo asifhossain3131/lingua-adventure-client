@@ -18,7 +18,6 @@ const Testimonials = () => {
             <SectionsTitle
             header={'testimonials'}
             title={'happy students'}
-            subtitle={'happy feedbacks'}
             ></SectionsTitle>
              <Carousel transition={{ duration: 2 }} className="rounded-xl bg-yellow-800 bg-opacity-40 p-8">
             {

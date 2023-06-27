@@ -11,7 +11,6 @@ const HomeSlider = () => {
          setSliders(res.data)
         })
     },[])
-  
     return (
         <>
             <Carousel className="rounded-xl">

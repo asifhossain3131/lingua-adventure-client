@@ -8,6 +8,7 @@ import Gallery from '../gallery/Gallery';
 import Facilities from '../facilities/Facilities';
 import Blogs from '../blogs/Blogs';
 import Experts from '../experts/Experts';
+import FreeTrial from '../free trial/FreeTrial';
 
 const Home = () => {
     const{darkMode}=useContext(ThemeContext)
@@ -16,6 +17,7 @@ const Home = () => {
             <HomeSlider></HomeSlider>
             <Gallery></Gallery>
             <Experts></Experts>
+            <FreeTrial></FreeTrial>
             <PopularClasses></PopularClasses>
             <PopularInstructors></PopularInstructors>
             <Facilities></Facilities>

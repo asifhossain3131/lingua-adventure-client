@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionsTitle from '../../../../components/section titles/SectionsTitle';
 
 const Facilities = () => {
   const allFacilities= [   
@@ -54,7 +55,7 @@ const Facilities = () => {
       
     return (
         <div>
-           <h1 className='font-semibold text-3xl text-center'>Why us</h1>
+         <SectionsTitle header={'why us?'} title={'we facilitate'}></SectionsTitle>
            <div className='flex items-center lg:mx-12'>
               <div className='space-y-4'>
                 {

@@ -11,6 +11,7 @@ import {
   Card,
 } from "@material-tailwind/react";
 import { HeartIcon, ShareIcon } from "@heroicons/react/24/solid";
+import SectionsTitle from "../../../../components/section titles/SectionsTitle";
 
 
 const Gallery = () => {
@@ -47,6 +48,8 @@ const Gallery = () => {
         },
     ]
     return (
+    <>
+       <SectionsTitle header={'gallery'} title={'our environments'}></SectionsTitle>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 mx-12 '>
             {
                 images.map(({id,imgSrc})=>
@@ -76,6 +79,7 @@ const Gallery = () => {
                 )
             }
         </div>
+    </>
     );
 };
 

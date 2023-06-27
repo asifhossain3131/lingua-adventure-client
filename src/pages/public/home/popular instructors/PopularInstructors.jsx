@@ -13,12 +13,12 @@ const PopularInstructors = () => {
     },[])
     return (
         <div>
-            <SectionsTitle header={'popular instructors'} title={'instructors followed by'} subtitle={'most students'}></SectionsTitle>
+            <SectionsTitle header={'popular instructors'} title={'most followed instructors'}></SectionsTitle>
 
           <div className='mx-12 grid grid-cols-1 lg:grid-cols-3 gap-4'>
             {
               PopularInstructors?.map(popularInstructor=>
-                <motion.div onClick={()=>setSelectedId(!selectedId)} className='card cursor-pointer bg-gray-400 w-64'>
+                <motion.div onClick={()=>setSelectedId(!selectedId)} className='card w-96 cursor-pointer font-semibold text-white bg-blue-800'>
                 <motion.h2 className='text-center p-2'>{popularInstructor?.name}</motion.h2>
                 <motion.img src={popularInstructor?.image}></motion.img>
                  {selectedId && <>
